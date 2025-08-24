@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <div class="dashboard-header">
+      <h1>🎉 Welcome to Dashboard 🎉</h1>
+      <p class="success-text">You're successfully logged in!</p>
+    </div>
+
+    <div id="userInfo"></div>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      const userInfoDiv = document.getElementById("userInfo");
+      userInfoDiv.innerHTML = `
+        <p><strong>Name:</strong> ${user.username}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Last Login:</strong> ${user.lastLogin || "First Time Login"}</p>
+      `;
+    } else {
+      window.location.href = "index.html"; // Redirect if not logged in
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
